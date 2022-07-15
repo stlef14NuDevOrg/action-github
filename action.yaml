@@ -1,0 +1,32 @@
+name: "Boost Security Scanner"
+description: "Scans a repository for security vulneratibilities"
+inputs:
+  action:
+    description: "Action to perform"
+    required: true
+    default: boost-registry
+  additional_args:
+    description: "Additional CLI arguments to pass"
+    required: false
+    default: ""
+  api_endpoint:
+    description: "Boost API endpoint"
+    required: true
+    default: https://api.dev.boostsec.io
+  api_token:
+    description: "Boost API token"
+    required: true
+  module:
+    description: "Registry module to fetch"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: ${{ github.action_path }}/scan.sh
+      shell: bash
+      env:
+        BOOST_API_ENDPOINT: ${{ inputs.api_endpoint }}
+        BOOST_API_TOKEN: ${{ inputs.api_token }}
+        BOOST_CLI_ARGUMENTS: ${{ inputs.additional_args }}
+        INPUT_ACTION: ${{ inputs.action }}
+        INPUT_MODULE: ${{ inputs.module }}
