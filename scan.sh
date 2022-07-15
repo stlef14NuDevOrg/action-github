@@ -46,11 +46,6 @@ main.registry ()
   init.config
   init.cli
 
-  if [ -z "${BOOST_EXEC_COMMAND:-}" ]; then
-    log.error "the 'exec_command' option must be defined when in exec mode"
-    exit 1
-  fi
-
   if [ -z "${BOOST_STEP_NAME:-}" ]; then
     log.error "the 'step_name' option must be defined in exec mode"
     exit 1
