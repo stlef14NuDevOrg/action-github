@@ -58,7 +58,7 @@ main.registry ()
   fi
   export BOOST_EXEC_COMMAND="docker run -v %CWD%:/src slef05/boost-semgrep:latest"
   exec ${BOOST_EXE} scan exec ${BOOST_CLI_ARGUMENTS:-} --command "${BOOST_EXEC_COMMAND}"
-}bo
+}
 
 case "${INPUT_ACTION:-scan}" in
   boost-registry)   main.registry ;;
