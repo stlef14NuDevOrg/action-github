@@ -1,2 +1,0 @@
-# action-github
-test action
