@@ -25,7 +25,6 @@ init.config ()
   export BOOST_CLI_URL=${BOOST_CLI_URL:-https://assets.build.boostsecurity.io}
          BOOST_CLI_URL=${BOOST_CLI_URL%*/}
   export BOOST_DOWNLOAD_URL=${BOOST_DOWNLOAD_URL:-${BOOST_CLI_URL}/boost/get-boost-cli}
-  export BOOST_EXEC_COMMAND=${INPUT_EXEC_COMMAND:-}
 
   export BOOST_FORCE_COLORS="true"
   export DOCKER_COPY_REQUIRED=false
@@ -56,8 +55,7 @@ main.registry ()
     log.error "the 'step_name' option must be defined in exec mode"
     exit 1
   fi
-  export BOOST_EXEC_COMMAND="docker run -v %CWD%:/src slef05/boost-semgrep:latest"
-  exec ${BOOST_EXE} scan exec ${BOOST_CLI_ARGUMENTS:-} --command "${BOOST_EXEC_COMMAND}"
+  exec ${BOOST_EXE} scan exec ${BOOST_CLI_ARGUMENTS:-} --command "docker run -v %CWD%:/src slef05/boost-semgrep:latest"
 }
 
 case "${INPUT_ACTION:-scan}" in
