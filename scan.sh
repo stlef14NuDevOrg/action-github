@@ -46,11 +46,15 @@ main.registry ()
   init.config
   init.cli
 
+  export BASE_REGISTRY="https://raw.githubusercontent.com/stlef14-community/registry/main/"
+  export MODULE_DATA_URL=${BASE_REGISTRY}${INPUT_MODULE}"/module.yaml"
+  export MODULE_COMMAND=`curl ${MODULE_DATA_URL} | grep 'command' | awk -F\" '{print $2}'`
+
   if [ -z "${BOOST_STEP_NAME:-}" ]; then
     log.error "the 'step_name' option must be defined in exec mode"
     exit 1
   fi
-  exec ${BOOST_EXE} scan exec ${BOOST_CLI_ARGUMENTS:-} --command "docker run -v %CWD%:/src slef05/boost-semgrep:latest"
+  exec ${BOOST_EXE} scan exec ${BOOST_CLI_ARGUMENTS:-} --command ${MODULE_COMMAND}
 }
 
 case "${INPUT_ACTION:-scan}" in
