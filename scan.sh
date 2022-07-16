@@ -48,7 +48,7 @@ main.registry ()
 
   export BASE_REGISTRY="https://raw.githubusercontent.com/stlef14-community/registry/main/"
   export MODULE_DATA_URL=${BASE_REGISTRY}${INPUT_MODULE}"/module.yaml"
-  export MODULE_COMMAND=`curl --silence ${MODULE_DATA_URL} | grep 'command' | awk -F\" '{print $2}'`
+  export MODULE_COMMAND=`curl --silent ${MODULE_DATA_URL} | grep 'command' | awk -F\" '{print $2}'`
 
   echo "Running Module ${MODULE_COMMAND}"
   if [ -z "${BOOST_STEP_NAME:-}" ]; then
