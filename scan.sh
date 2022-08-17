@@ -49,14 +49,14 @@ main.registry ()
   export BASE_REGISTRY="https://raw.githubusercontent.com/stlef14-community/registry/main/"
   export MODULE_DATA_URL=${BASE_REGISTRY}${INPUT_MODULE}"/module.yaml"
   export MODULE_COMMAND=`curl --silent ${MODULE_DATA_URL} | grep 'command' | awk -F\" '{print $2}'`
-  export MODULE_COMMAND_ARGS=${MODULE_COMMAND}" "
+  export MODULE_COMMAND_ARGS=${MODULE_COMMAND}" "${BOOST_CMD_ARGS}
 
   echo "Running Module ${MODULE_COMMAND}"
   if [ -z "${BOOST_STEP_NAME:-}" ]; then
     log.error "the 'step_name' option must be defined in exec mode"
     exit 1
   fi
-  exec ${BOOST_EXE} scan exec ${BOOST_CLI_ARGUMENTS:-} --command "${MODULE_COMMAND}"
+  exec ${BOOST_EXE} scan exec ${BOOST_CLI_ARGUMENTS:-} --command "${MODULE_COMMAND_ARGS}"
 }
 
 case "${INPUT_ACTION:-scan}" in
