@@ -9,6 +9,10 @@ inputs:
     description: "Additional CLI arguments to pass"
     required: false
     default: ""
+  command_args:
+    description: "Additional command arguments to pass"
+    required: false
+    default: ""
   api_endpoint:
     description: "Boost API endpoint"
     required: true
@@ -31,6 +35,7 @@ runs:
         BOOST_API_ENDPOINT: ${{ inputs.api_endpoint }}
         BOOST_API_TOKEN: ${{ inputs.api_token }}
         BOOST_CLI_ARGUMENTS: ${{ inputs.additional_args }}
+        BOOST_CMD_ARGS: ${{ inputs.command_args }}
         BOOST_STEP_NAME: ${{ inputs.step_name }}
         INPUT_ACTION: ${{ inputs.action }}
         INPUT_MODULE: ${{ inputs.module }}
